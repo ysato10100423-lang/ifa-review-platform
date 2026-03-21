@@ -10,6 +10,7 @@ const ADMIN_EMAIL = 'y.sato10100423@gmail.com'
 
 interface Report {
   id: string
+  review_id: string
   reason: string
   created_at: string
   reviews: { comment: string | null; advisor_id: string } | null
@@ -22,6 +23,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true)
   const [unauthorized, setUnauthorized] = useState(false)
   const [tab, setTab] = useState<'advisors' | 'reports'>('advisors')
+  const [deletingId, setDeletingId] = useState<string | null>(null)
 
   useEffect(() => {
     const supabase = createClient()
@@ -45,6 +47,15 @@ export default function AdminPage() {
       })
     })
   }, [router])
+
+  const handleDeleteReview = async (reviewId: string) => {
+    if (!confirm('この口コミを削除しますか？この操作は取り消せません。')) return
+    setDeletingId(reviewId)
+    const supabase = createClient()
+    await supabase.from('reviews').delete().eq('id', reviewId)
+    setReports((prev) => prev.filter((r) => r.review_id !== reviewId))
+    setDeletingId(null)
+  }
 
   if (loading) return <div className="text-center py-12 text-gray-400">読み込み中...</div>
 
@@ -154,15 +165,24 @@ export default function AdminPage() {
                     {new Date(report.created_at).toLocaleDateString('ja-JP')}
                   </td>
                   <td className="px-4 py-3">
-                    {report.reviews?.advisor_id && (
-                      <Link
-                        href={`/advisors/${report.reviews.advisor_id}`}
-                        className="text-blue-600 hover:underline text-xs"
-                        target="_blank"
+                    <div className="flex items-center gap-3">
+                      {report.reviews?.advisor_id && (
+                        <Link
+                          href={`/advisors/${report.reviews.advisor_id}`}
+                          className="text-blue-600 hover:underline text-xs"
+                          target="_blank"
+                        >
+                          口コミを見る
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => handleDeleteReview(report.review_id)}
+                        disabled={deletingId === report.review_id}
+                        className="text-red-500 hover:text-red-700 text-xs disabled:opacity-50"
                       >
-                        口コミを見る
-                      </Link>
-                    )}
+                        {deletingId === report.review_id ? '削除中...' : '口コミを削除'}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
