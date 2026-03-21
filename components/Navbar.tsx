@@ -37,6 +37,9 @@ export default function Navbar() {
                   管理画面
                 </Link>
               )}
+              <Link href="/mypage" className="text-sm text-gray-600 hover:text-gray-900">
+                マイページ
+              </Link>
               <span className="text-sm text-gray-600 hidden sm:block">{user.email}</span>
               <button
                 onClick={handleSignOut}
