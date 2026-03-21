@@ -32,6 +32,11 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {user ? (
             <>
+              {user.email === 'y.sato10100423@gmail.com' && (
+                <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900">
+                  管理画面
+                </Link>
+              )}
               <span className="text-sm text-gray-600 hidden sm:block">{user.email}</span>
               <button
                 onClick={handleSignOut}
