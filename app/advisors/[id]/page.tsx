@@ -150,7 +150,7 @@ export default function AdvisorDetailPage() {
       ) : (
         <div className="space-y-3">
           {reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} />
+            <ReviewCard key={review.id} review={review} isLoggedIn={!!user} />
           ))}
         </div>
       )}
