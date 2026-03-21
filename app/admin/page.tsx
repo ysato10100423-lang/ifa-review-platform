@@ -57,6 +57,15 @@ export default function AdminPage() {
     setDeletingId(null)
   }
 
+  const handleDeleteAdvisor = async (advisorId: string, advisorName: string) => {
+    if (!confirm(`「${advisorName}」を削除しますか？\n関連する口コミもすべて削除されます。この操作は取り消せません。`)) return
+    setDeletingId(advisorId)
+    const supabase = createClient()
+    await supabase.from('advisors').delete().eq('id', advisorId)
+    setAdvisors((prev) => prev.filter((a) => a.id !== advisorId))
+    setDeletingId(null)
+  }
+
   if (loading) return <div className="text-center py-12 text-gray-400">読み込み中...</div>
 
   if (unauthorized) return (
@@ -127,9 +136,18 @@ export default function AdminPage() {
                     <td className="px-4 py-3 text-gray-600">{advisor.avg_rating > 0 ? advisor.avg_rating.toFixed(1) : '-'}</td>
                     <td className="px-4 py-3 text-gray-600">{advisor.review_count}件</td>
                     <td className="px-4 py-3">
-                      <Link href={`/admin/advisors/${advisor.id}/edit`} className="text-blue-600 hover:underline">
-                        編集
-                      </Link>
+                      <div className="flex items-center gap-3">
+                        <Link href={`/admin/advisors/${advisor.id}/edit`} className="text-blue-600 hover:underline">
+                          編集
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteAdvisor(advisor.id, advisor.name)}
+                          disabled={deletingId === advisor.id}
+                          className="text-red-500 hover:text-red-700 disabled:opacity-50"
+                        >
+                          {deletingId === advisor.id ? '削除中...' : '削除'}
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
