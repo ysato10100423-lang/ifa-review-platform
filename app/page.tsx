@@ -2,10 +2,19 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
-import { Advisor, AdvisorType, ADVISOR_TYPE_LABELS } from '@/types'
+import { Advisor, AdvisorType, ADVISOR_TYPE_LABELS, MeetingMethod, MEETING_METHOD_LABELS } from '@/types'
 import AdvisorCard from '@/components/AdvisorCard'
 
-const PREFECTURES = ['東京都', '大阪府', '愛知県', '神奈川県', '福岡県', '北海道', '宮城県', '広島県']
+const PREFECTURES = [
+  '全国',
+  '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+  '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
+  '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県',
+  '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県',
+  '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県',
+  '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県',
+  '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県',
+]
 
 export default function Home() {
   const [advisors, setAdvisors] = useState<Advisor[]>([])
@@ -13,11 +22,12 @@ export default function Home() {
   const [search, setSearch] = useState('')
   const [typeFilter, setTypeFilter] = useState<AdvisorType | ''>('')
   const [prefFilter, setPrefFilter] = useState('')
+  const [meetingFilter, setMeetingFilter] = useState<MeetingMethod | ''>('')
   const [sortBy, setSortBy] = useState<'avg_rating' | 'review_count'>('avg_rating')
 
   useEffect(() => {
     fetchAdvisors()
-  }, [typeFilter, prefFilter, sortBy])
+  }, [typeFilter, prefFilter, meetingFilter, sortBy])
 
   async function fetchAdvisors() {
     setLoading(true)
@@ -29,6 +39,7 @@ export default function Home() {
 
     if (typeFilter) query = query.eq('type', typeFilter)
     if (prefFilter) query = query.eq('prefecture', prefFilter)
+    if (meetingFilter) query = query.eq('meeting_method', meetingFilter)
 
     const { data } = await query
     setAdvisors(data || [])
@@ -76,6 +87,16 @@ export default function Home() {
             <option value="">地域: すべて</option>
             {PREFECTURES.map((p) => (
               <option key={p} value={p}>{p}</option>
+            ))}
+          </select>
+          <select
+            value={meetingFilter}
+            onChange={(e) => setMeetingFilter(e.target.value as MeetingMethod | '')}
+            className="border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none"
+          >
+            <option value="">面談方法: すべて</option>
+            {(Object.keys(MEETING_METHOD_LABELS) as MeetingMethod[]).map((k) => (
+              <option key={k} value={k}>{MEETING_METHOD_LABELS[k]}</option>
             ))}
           </select>
           <select

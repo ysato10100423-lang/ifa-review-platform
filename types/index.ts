@@ -1,5 +1,13 @@
 export type AdvisorType = 'ifa' | 'insurance' | 'both'
 
+export type MeetingMethod = 'in_person' | 'online' | 'both'
+
+export const MEETING_METHOD_LABELS: Record<MeetingMethod, string> = {
+  in_person: '対面',
+  online: 'オンライン',
+  both: 'どちらも可',
+}
+
 export type ServiceUsed =
   | 'investment_trust'
   | 'stocks'
@@ -43,6 +51,7 @@ export interface Advisor {
   prefecture: string | null
   website_url: string | null
   specialties: string[] | null
+  meeting_method: MeetingMethod | null
   avg_rating: number
   review_count: number
   created_at: string

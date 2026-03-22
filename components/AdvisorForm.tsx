@@ -3,9 +3,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
-import { Advisor, AdvisorType, ADVISOR_TYPE_LABELS } from '@/types'
+import { Advisor, AdvisorType, ADVISOR_TYPE_LABELS, MeetingMethod, MEETING_METHOD_LABELS } from '@/types'
 
 const PREFECTURES = [
+  '全国',
   '北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県',
   '茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県',
   '新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県',
@@ -31,6 +32,7 @@ export default function AdvisorForm({ initial }: AdvisorFormProps) {
     address: initial?.address || '',
     website_url: initial?.website_url || '',
     specialties: initial?.specialties?.join('、') || '',
+    meeting_method: initial?.meeting_method || '' as MeetingMethod | '',
   })
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -61,6 +63,7 @@ export default function AdvisorForm({ initial }: AdvisorFormProps) {
       specialties: form.specialties
         ? form.specialties.split(/[、,，]/).map((s) => s.trim()).filter(Boolean)
         : null,
+      meeting_method: form.meeting_method || null,
     }
 
     if (isEdit) {
@@ -130,6 +133,21 @@ export default function AdvisorForm({ initial }: AdvisorFormProps) {
           <option value="">選択してください</option>
           {PREFECTURES.map((p) => (
             <option key={p} value={p}>{p}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">面談方法</label>
+        <select
+          name="meeting_method"
+          value={form.meeting_method}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">選択してください</option>
+          {(Object.keys(MEETING_METHOD_LABELS) as MeetingMethod[]).map((k) => (
+            <option key={k} value={k}>{MEETING_METHOD_LABELS[k]}</option>
           ))}
         </select>
       </div>
