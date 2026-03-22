@@ -10,6 +10,9 @@ const notoSansJP = Noto_Sans_JP({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'IFAレビュー - IFA・保険代理店の口コミ・評判',
   description: '実際に利用したユーザーによるIFA・保険代理店の口コミ・評価プラットフォーム',
+  verification: {
+    google: 'LFV74eYugr7psQeNsXb3NySC4R3pISbN8XgZ4XsiyMU',
+  },
 }
 
 export const viewport: Viewport = {
