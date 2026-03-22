@@ -5,6 +5,18 @@ export default function GuidelinesPage() {
     <div className="max-w-2xl mx-auto">
       <h1 className="text-xl font-bold text-gray-900 mb-6">投稿ガイドライン・免責事項</h1>
 
+      {/* サイトの位置づけ */}
+      <section className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-4">
+        <h2 className="text-base font-semibold text-blue-900 mb-3">当サイトの位置づけ</h2>
+        <ul className="text-sm text-blue-800 space-y-2 list-disc list-inside">
+          <li>当サイトは、実際にIFA・保険代理店を利用したユーザーの<strong>口コミ情報の掲載のみ</strong>を目的としています</li>
+          <li>金融商品・保険商品の<strong>勧誘・媒介・紹介・斡旋は一切行っておりません</strong></li>
+          <li>特定の事業者を推薦・保証・格付けするものではありません</li>
+          <li>掲載内容は金融商品取引法・保険業法における「金融商品の販売・勧誘」には該当しません</li>
+          <li>投資・保険等の契約・申込みは必ずご自身の判断と責任で行ってください</li>
+        </ul>
+      </section>
+
       {/* 基本方針 */}
       <section className="bg-white border border-gray-200 rounded-lg p-5 mb-4">
         <h2 className="text-base font-semibold text-gray-900 mb-3">基本方針</h2>

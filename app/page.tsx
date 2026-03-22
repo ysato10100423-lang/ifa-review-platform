@@ -54,9 +54,18 @@ export default function Home() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">IFA・保険代理店を探す</h1>
-        <p className="text-sm text-gray-500">実際に利用したユーザーの口コミ・評価を参考に、あなたに合ったアドバイザーを見つけましょう</p>
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">IFA・保険代理店の口コミ・評判</h1>
+        <p className="text-sm text-gray-500">実際に利用したユーザーによる口コミ・評価を掲載しています</p>
+      </div>
+
+      {/* 免責バナー */}
+      <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 mb-4">
+        <p className="text-xs text-gray-500 leading-relaxed">
+          当サイトは利用者の口コミ情報の掲載のみを目的としており、金融商品・保険の勧誘・媒介・紹介は行っておりません。
+          掲載された口コミはユーザー個人の意見であり、特定の事業者を推薦・保証するものではありません。
+          契約・申込みは必ずご自身の判断と責任で行ってください。
+        </p>
       </div>
 
       {/* 検索・フィルター */}

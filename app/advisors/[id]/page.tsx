@@ -118,6 +118,14 @@ export default function AdvisorDetailPage() {
         )}
       </div>
 
+      {/* 免責文 */}
+      <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 mb-5">
+        <p className="text-xs text-gray-500 leading-relaxed">
+          掲載されている評価・口コミはユーザー個人の体験・意見です。当サイトはこの事業者を推薦・保証するものではなく、金融商品・保険の勧誘・媒介は行っておりません。
+          契約・申込みはご自身の判断と責任で行ってください。
+        </p>
+      </div>
+
       {/* 口コミ投稿ボタン */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">口コミ ({reviews.length}件)</h2>
