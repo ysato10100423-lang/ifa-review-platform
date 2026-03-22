@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Review, SERVICE_LABELS } from '@/types'
 import StarRating from './StarRating'
 import ReportModal from './ReportModal'
+import { createClient } from '@/lib/supabase'
 
 interface ReviewCardProps {
   review: Review
@@ -19,8 +20,40 @@ const RATING_LABELS = [
 
 export default function ReviewCard({ review, isLoggedIn }: ReviewCardProps) {
   const [showReport, setShowReport] = useState(false)
+  const [helpfulCount, setHelpfulCount] = useState(0)
+  const [liked, setLiked] = useState(false)
+  const [liking, setLiking] = useState(false)
   const date = new Date(review.created_at).toLocaleDateString('ja-JP')
   const nickname = review.profiles?.nickname || '匿名ユーザー'
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.from('review_likes').select('id', { count: 'exact' }).eq('review_id', review.id)
+      .then(({ count }) => setHelpfulCount(count ?? 0))
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data.user) return
+      supabase.from('review_likes').select('id').eq('review_id', review.id).eq('user_id', data.user.id).single()
+        .then(({ data: like }) => setLiked(!!like))
+    })
+  }, [review.id])
+
+  const handleLike = async () => {
+    if (!isLoggedIn || liking) return
+    setLiking(true)
+    const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) { setLiking(false); return }
+    if (liked) {
+      await supabase.from('review_likes').delete().eq('review_id', review.id).eq('user_id', user.id)
+      setLiked(false)
+      setHelpfulCount((c) => c - 1)
+    } else {
+      await supabase.from('review_likes').insert({ review_id: review.id, user_id: user.id })
+      setLiked(true)
+      setHelpfulCount((c) => c + 1)
+    }
+    setLiking(false)
+  }
 
   return (
     <>
@@ -82,6 +115,26 @@ export default function ReviewCard({ review, isLoggedIn }: ReviewCardProps) {
             {review.comment}
           </p>
         )}
+
+        {/* 参考になったボタン */}
+        <div className="flex items-center justify-end mt-3 pt-3 border-t border-gray-100">
+          <button
+            onClick={handleLike}
+            disabled={!isLoggedIn || liking}
+            className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border transition-colors ${
+              liked
+                ? 'bg-blue-50 border-blue-300 text-blue-600'
+                : 'border-gray-200 text-gray-400 hover:border-blue-300 hover:text-blue-500'
+            } disabled:cursor-not-allowed`}
+            title={isLoggedIn ? undefined : 'ログインすると「参考になった」を押せます'}
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3" />
+            </svg>
+            参考になった {helpfulCount > 0 && <span className="font-medium">{helpfulCount}</span>}
+          </button>
+        </div>
       </div>
 
       {showReport && (
