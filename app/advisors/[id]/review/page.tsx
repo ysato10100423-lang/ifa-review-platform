@@ -31,6 +31,7 @@ export default function ReviewPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [serviceUsed, setServiceUsed] = useState<ServiceUsed | ''>('')
   const [comment, setComment] = useState('')
+  const [agreed, setAgreed] = useState(false)
 
   useEffect(() => {
     const supabase = createClient()
@@ -103,13 +104,17 @@ export default function ReviewPage() {
         {/* 投稿ガイドライン */}
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
           <p className="text-sm font-semibold text-yellow-800 mb-2">投稿前にご確認ください</p>
-          <ul className="text-sm text-yellow-700 space-y-1 list-disc list-inside">
-            <li>担当者の個人名（フルネーム・ニックネーム等）の記載は禁止しています</li>
-            <li>事実に基づかない誹謗中傷・侮辱的な表現は禁止しています</li>
-            <li>個人的な感情のみによる極端な低評価はお控えください</li>
+          <ul className="text-sm text-yellow-700 space-y-1 list-disc list-inside mb-2">
+            <li>実際に利用した体験に基づく内容のみ投稿してください</li>
+            <li>担当者・従業員の個人名（フルネーム・ニックネーム等）の記載は禁止しています</li>
+            <li>虚偽の事実・誹謗中傷・侮辱的な表現は禁止しています</li>
+            <li>競合他社の関係者による不正投稿は禁止しています</li>
+            <li>投稿内容に関する法的責任は投稿者本人が負います</li>
             <li>ガイドライン違反の投稿は運営が確認の上、削除する場合があります</li>
-            <li>他のユーザーが違反投稿を発見した場合は「通報」ボタンからご報告いただけます</li>
           </ul>
+          <Link href="/guidelines" target="_blank" className="text-xs text-yellow-700 underline">
+            投稿ガイドライン・免責事項の全文を読む →
+          </Link>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -207,13 +212,29 @@ export default function ReviewPage() {
             <div className="text-xs text-gray-400 text-right">{comment.length}/200</div>
           </div>
 
+          {/* 同意チェックボックス */}
+          <label className="flex items-start gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              className="mt-0.5 shrink-0"
+            />
+            <span className="text-sm text-gray-600">
+              <Link href="/guidelines" target="_blank" className="text-blue-600 underline">
+                投稿ガイドライン・免責事項
+              </Link>
+              を読み、内容に同意した上で投稿します。投稿内容に関する法的責任は投稿者本人が負うことを理解しています。
+            </span>
+          </label>
+
           {error && (
             <div className="bg-red-50 text-red-600 text-sm rounded px-3 py-2">{error}</div>
           )}
 
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !agreed}
             className="w-full bg-blue-600 text-white py-3 rounded font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? '投稿中...' : '口コミを投稿する'}
