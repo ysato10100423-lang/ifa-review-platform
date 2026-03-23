@@ -8,6 +8,9 @@ export default function Footer() {
           <Link href="/guidelines" className="text-xs text-gray-500 hover:text-gray-700 hover:underline">
             投稿ガイドライン・免責事項
           </Link>
+          <Link href="/privacy" className="text-xs text-gray-500 hover:text-gray-700 hover:underline">
+            プライバシーポリシー
+          </Link>
         </div>
         <p className="text-xs text-gray-400 leading-relaxed">
           © {new Date().getFullYear()} IFAレビュー
