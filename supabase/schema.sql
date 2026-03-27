@@ -99,6 +99,39 @@ create trigger on_auth_user_created
 after insert on auth.users
 for each row execute function handle_new_user();
 
+-- advisors に meeting_method カラムを追加
+alter table advisors add column if not exists meeting_method text
+  check (meeting_method in ('in_person', 'online', 'both'));
+
+-- 参考になった（いいね）テーブル
+create table if not exists review_likes (
+  id uuid default gen_random_uuid() primary key,
+  review_id uuid references reviews(id) on delete cascade not null,
+  user_id uuid references auth.users(id) on delete cascade not null,
+  created_at timestamptz default now(),
+  unique(review_id, user_id)
+);
+
+alter table review_likes enable row level security;
+create policy "review_likes_read"   on review_likes for select using (true);
+create policy "review_likes_insert" on review_likes for insert with check (auth.uid() = user_id);
+create policy "review_likes_delete" on review_likes for delete using (auth.uid() = user_id);
+
+-- 通報テーブル
+create table if not exists reports (
+  id uuid default gen_random_uuid() primary key,
+  review_id uuid references reviews(id) on delete cascade not null,
+  user_id uuid references auth.users(id) on delete cascade not null,
+  reason text not null,
+  created_at timestamptz default now(),
+  unique(review_id, user_id)
+);
+
+alter table reports enable row level security;
+-- 通報は誰でも投稿可（自分の通報のみ）
+create policy "reports_insert" on reports for insert with check (auth.uid() = user_id);
+-- 通報の閲覧は運営のみ（service_role キーで確認）
+
 -- サンプルデータ
 insert into advisors (name, type, description, prefecture, specialties) values
 ('サンプルIFA東京', 'ifa', 'NISA・投資信託の相談を中心に、個人の資産形成をサポートします。', '東京都', array['NISA', '資産形成', '投資信託']),

@@ -18,11 +18,12 @@ const RATING_LABELS = [
   { key: 'rating_expertise', label: '専門知識' },
 ] as const
 
-export default function ReviewCard({ review, isLoggedIn }: ReviewCardProps) {
+export default function ReviewCard({ review, isLoggedIn: isLoggedInProp }: ReviewCardProps) {
   const [showReport, setShowReport] = useState(false)
   const [helpfulCount, setHelpfulCount] = useState(0)
   const [liked, setLiked] = useState(false)
   const [liking, setLiking] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInProp ?? false)
   const date = new Date(review.created_at).toLocaleDateString('ja-JP')
   const nickname = review.profiles?.nickname || '匿名ユーザー'
 
@@ -32,6 +33,7 @@ export default function ReviewCard({ review, isLoggedIn }: ReviewCardProps) {
       .then(({ count }) => setHelpfulCount(count ?? 0))
     supabase.auth.getUser().then(({ data }) => {
       if (!data.user) return
+      setIsLoggedIn(true)
       supabase.from('review_likes').select('id').eq('review_id', review.id).eq('user_id', data.user.id).single()
         .then(({ data: like }) => setLiked(!!like))
     })
