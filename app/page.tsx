@@ -72,6 +72,24 @@ export default async function Home({
 
   return (
     <div>
+      {/* 診断バナー */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl p-5 mb-6 text-white">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-medium bg-white/20 inline-block px-2 py-0.5 rounded-full mb-2">無料・1分で完了</p>
+            <h2 className="text-lg font-bold mb-1">あなたに合った証券会社がわかる</h2>
+            <p className="text-sm text-blue-100">6つの質問に答えるだけで、ぴったりの証券会社をランキング形式でご提案します</p>
+          </div>
+          <span className="text-4xl shrink-0">📊</span>
+        </div>
+        <a
+          href="/diagnosis"
+          className="mt-4 inline-block bg-white text-blue-700 font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-blue-50 transition-colors"
+        >
+          診断スタート →
+        </a>
+      </div>
+
       <div className="mb-4">
         <h1 className="text-2xl font-bold text-gray-900 mb-1">IFA・保険代理店の口コミ・評判</h1>
         <p className="text-sm text-gray-500">実際に利用したユーザーによる口コミ・評価を掲載しています</p>
@@ -102,7 +120,10 @@ export default async function Home({
 
       {/* 一覧 */}
       {filtered.length === 0 ? (
-        <div className="text-center py-12 text-gray-400">該当する結果がありません</div>
+        <div className="text-center py-12 bg-white border border-gray-200 rounded-lg">
+          <p className="text-gray-400 mb-2">該当する結果がありません</p>
+          <p className="text-xs text-gray-400">条件を変えて再検索してください</p>
+        </div>
       ) : (
         <div className="space-y-3">
           {filtered.map((advisor) => (

@@ -34,7 +34,10 @@ export default function ReviewCTA({ advisorId, reviewCount }: ReviewCTAProps) {
       <h2 className="text-lg font-semibold text-gray-900">口コミ ({reviewCount}件)</h2>
       {state === 'loading' && <span className="text-sm text-gray-300">...</span>}
       {state === 'guest' && (
-        <Link href="/auth/login" className="text-sm text-blue-600 hover:underline">
+        <Link
+          href="/auth/login"
+          className="text-sm bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
           ログインして口コミを書く
         </Link>
       )}

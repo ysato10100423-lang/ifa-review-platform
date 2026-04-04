@@ -25,7 +25,15 @@ export async function GET(request: NextRequest) {
         },
       }
     )
-    await supabase.auth.exchangeCodeForSession(code)
+    const { data } = await supabase.auth.exchangeCodeForSession(code)
+
+    // Google等のOAuthログイン時にprofilesレコードを作成（なければ）
+    if (data.user) {
+      await supabase.from('profiles').upsert(
+        { id: data.user.id, nickname: null },
+        { onConflict: 'id', ignoreDuplicates: true }
+      )
+    }
   }
 
   const next = requestUrl.searchParams.get('next') || '/'

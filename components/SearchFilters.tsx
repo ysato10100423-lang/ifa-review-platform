@@ -29,14 +29,14 @@ export default function SearchFilters({
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
-  // テキスト入力のみローカルstate（タイピング中のURL書き換えを防ぐため）
   const [searchInput, setSearchInput] = useState(initialSearch)
 
-  // セレクトはURLを正とする（controlled）
   const currentType = searchParams.get('type') || ''
   const currentPrefecture = searchParams.get('prefecture') || ''
   const currentMeeting = searchParams.get('meeting') || ''
   const currentSort = searchParams.get('sort') || 'avg_rating'
+
+  const hasActiveFilters = !!(currentType || currentPrefecture || currentMeeting || searchInput)
 
   const updateParam = useCallback(
     (key: string, value: string) => {
@@ -53,14 +53,31 @@ export default function SearchFilters({
     [router, pathname, searchParams]
   )
 
+  const resetFilters = () => {
+    setSearchInput('')
+    const params = new URLSearchParams()
+    if (currentSort && currentSort !== 'avg_rating') params.set('sort', currentSort)
+    startTransition(() => {
+      router.push(`${pathname}${params.toString() ? `?${params.toString()}` : ''}`)
+    })
+  }
+
   return (
     <div className={`bg-white border border-gray-200 rounded-lg p-4 mb-4 space-y-3 ${isPending ? 'opacity-70' : ''}`}>
+      {/* 検索ボックス */}
       <form
         onSubmit={(e) => {
           e.preventDefault()
           updateParam('q', searchInput)
         }}
+        className="relative"
       >
+        <svg
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+        </svg>
         <input
           type="text"
           name="q"
@@ -68,50 +85,76 @@ export default function SearchFilters({
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onBlur={() => updateParam('q', searchInput)}
-          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </form>
-      <div className="flex flex-wrap gap-2">
+
+      {/* フィルター */}
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
         <select
           value={currentType}
           onChange={(e) => updateParam('type', e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none"
+          className={`border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            currentType ? 'border-blue-400 bg-blue-50 text-blue-700' : 'border-gray-300 text-gray-700'
+          }`}
         >
           <option value="">種別: すべて</option>
           {(Object.keys(ADVISOR_TYPE_LABELS) as AdvisorType[]).map((k) => (
             <option key={k} value={k}>{ADVISOR_TYPE_LABELS[k]}</option>
           ))}
         </select>
+
         <select
           value={currentPrefecture}
           onChange={(e) => updateParam('prefecture', e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none"
+          className={`border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            currentPrefecture ? 'border-blue-400 bg-blue-50 text-blue-700' : 'border-gray-300 text-gray-700'
+          }`}
         >
           <option value="">地域: すべて</option>
           {PREFECTURES.map((p) => (
             <option key={p} value={p}>{p}</option>
           ))}
         </select>
+
         <select
           value={currentMeeting}
           onChange={(e) => updateParam('meeting', e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none"
+          className={`border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            currentMeeting ? 'border-blue-400 bg-blue-50 text-blue-700' : 'border-gray-300 text-gray-700'
+          }`}
         >
-          <option value="">面談方法: すべて</option>
+          <option value="">面談: すべて</option>
           {(Object.keys(MEETING_METHOD_LABELS) as MeetingMethod[]).map((k) => (
             <option key={k} value={k}>{MEETING_METHOD_LABELS[k]}</option>
           ))}
         </select>
+
         <select
           value={currentSort}
           onChange={(e) => updateParam('sort', e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none"
+          className="border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="avg_rating">評価が高い順</option>
           <option value="review_count">口コミが多い順</option>
           <option value="name">名前順</option>
         </select>
       </div>
+
+      {/* リセットボタン */}
+      {hasActiveFilters && (
+        <div className="flex justify-end">
+          <button
+            onClick={resetFilters}
+            className="text-xs text-gray-500 hover:text-gray-700 flex items-center gap-1"
+          >
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            フィルターをリセット
+          </button>
+        </div>
+      )}
     </div>
   )
 }

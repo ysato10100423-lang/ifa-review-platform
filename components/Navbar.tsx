@@ -26,31 +26,37 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-10">
       <div className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
-        <Link href="/" className="text-lg font-bold text-blue-700">
+        <Link href="/" className="text-lg font-bold text-blue-700 shrink-0">
           IFAレビュー
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {user ? (
             <>
               {user.email === 'y.sato10100423@gmail.com' && (
-                <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900">
+                <Link href="/admin" className="text-sm text-gray-600 hover:text-gray-900 hidden sm:block">
                   管理画面
                 </Link>
               )}
-              <Link href="/mypage" className="text-sm text-gray-600 hover:text-gray-900">
+              <Link
+                href="/mypage"
+                className="text-sm text-gray-600 hover:text-gray-900 px-2 py-1 rounded hover:bg-gray-100"
+              >
                 マイページ
               </Link>
-              <span className="text-sm text-gray-600 hidden sm:block">{user.email}</span>
+              <span className="text-sm text-gray-400 hidden sm:block truncate max-w-[160px]">{user.email}</span>
               <button
                 onClick={handleSignOut}
-                className="text-sm text-gray-500 hover:text-gray-700"
+                className="text-sm text-gray-500 hover:text-gray-700 px-2 py-1 rounded hover:bg-gray-100"
               >
                 ログアウト
               </button>
             </>
           ) : (
             <>
-              <Link href="/auth/login" className="text-sm text-gray-600 hover:text-gray-900">
+              <Link
+                href="/auth/login"
+                className="text-sm text-gray-600 hover:text-gray-900 px-3 py-1.5 rounded hover:bg-gray-100"
+              >
                 ログイン
               </Link>
               <Link
