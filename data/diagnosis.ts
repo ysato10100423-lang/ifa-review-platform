@@ -134,12 +134,21 @@ export const BROKERS: Broker[] = [
     url: 'https://kabu.com/',
     color: 'purple',
   },
+  {
+    id: 'gmo',
+    name: 'GMOクリック証券',
+    tagline: 'FX・CFDに強く手数料が業界最安水準。アクティブトレーダー向け',
+    strengths: ['FX・CFDが充実', '国内株手数料が低い', 'スマホアプリが使いやすい', 'ツールが高機能'],
+    url: 'https://www.click-sec.com/',
+    badge: 'FX・CFD強い',
+    color: 'green',
+  },
 ]
 
 // 回答の組み合わせからスコアを算出する
 export function calcScores(answers: Record<string, string>): Record<string, number> {
   const scores: Record<string, number> = {
-    sbi: 0, rakuten: 0, monex: 0, matsui: 0, paypay: 0, aukabu: 0,
+    sbi: 0, rakuten: 0, monex: 0, matsui: 0, paypay: 0, aukabu: 0, gmo: 0,
   }
 
   // 経験レベル
@@ -148,27 +157,27 @@ export function calcScores(answers: Record<string, string>): Record<string, numb
   } else if (answers.experience === 'beginner') {
     scores.rakuten += 2; scores.sbi += 2; scores.matsui += 1; scores.aukabu += 1
   } else if (answers.experience === 'intermediate') {
-    scores.sbi += 2; scores.monex += 2; scores.matsui += 2; scores.rakuten += 1
+    scores.sbi += 2; scores.monex += 2; scores.matsui += 2; scores.rakuten += 1; scores.gmo += 2
   } else if (answers.experience === 'advanced') {
-    scores.sbi += 3; scores.monex += 3; scores.matsui += 2
+    scores.sbi += 3; scores.monex += 3; scores.matsui += 2; scores.gmo += 3
   }
 
   // 投資目的
   if (answers.goal === 'retirement') {
     scores.sbi += 2; scores.rakuten += 2; scores.matsui += 2; scores.aukabu += 1
   } else if (answers.goal === 'growth') {
-    scores.sbi += 2; scores.monex += 3; scores.matsui += 1
+    scores.sbi += 2; scores.monex += 3; scores.matsui += 1; scores.gmo += 2
   } else if (answers.goal === 'education') {
     scores.rakuten += 2; scores.sbi += 2; scores.aukabu += 2
   } else if (answers.goal === 'income') {
-    scores.monex += 2; scores.sbi += 2; scores.matsui += 2
+    scores.monex += 2; scores.sbi += 2; scores.matsui += 2; scores.gmo += 2
   }
 
   // 投資期間
   if (answers.period === 'short') {
-    scores.paypay += 2; scores.sbi += 1; scores.monex += 1
+    scores.paypay += 2; scores.sbi += 1; scores.monex += 1; scores.gmo += 3
   } else if (answers.period === 'medium') {
-    scores.sbi += 2; scores.rakuten += 2; scores.monex += 1
+    scores.sbi += 2; scores.rakuten += 2; scores.monex += 1; scores.gmo += 1
   } else if (answers.period === 'long') {
     scores.sbi += 2; scores.rakuten += 2; scores.matsui += 2
   } else if (answers.period === 'very_long') {
@@ -181,20 +190,20 @@ export function calcScores(answers: Record<string, string>): Record<string, numb
   } else if (answers.risk === 'maybe') {
     scores.rakuten += 2; scores.sbi += 1; scores.aukabu += 1
   } else if (answers.risk === 'yes') {
-    scores.sbi += 2; scores.monex += 2; scores.matsui += 1
+    scores.sbi += 2; scores.monex += 2; scores.matsui += 1; scores.gmo += 1
   } else if (answers.risk === 'absolutely') {
-    scores.monex += 3; scores.sbi += 2; scores.matsui += 1
+    scores.monex += 3; scores.sbi += 2; scores.matsui += 1; scores.gmo += 3
   }
 
   // 投資金額
   if (answers.amount === 'micro') {
     scores.paypay += 4; scores.rakuten += 2; scores.sbi += 1
   } else if (answers.amount === 'small') {
-    scores.rakuten += 2; scores.sbi += 2; scores.aukabu += 1; scores.matsui += 1
+    scores.rakuten += 2; scores.sbi += 2; scores.aukabu += 1; scores.matsui += 1; scores.gmo += 1
   } else if (answers.amount === 'medium') {
-    scores.sbi += 2; scores.monex += 2; scores.matsui += 2; scores.rakuten += 1
+    scores.sbi += 2; scores.monex += 2; scores.matsui += 2; scores.rakuten += 1; scores.gmo += 2
   } else if (answers.amount === 'large') {
-    scores.sbi += 3; scores.monex += 3; scores.matsui += 2
+    scores.sbi += 3; scores.monex += 3; scores.matsui += 2; scores.gmo += 3
   }
 
   // 興味のある商品
@@ -205,7 +214,7 @@ export function calcScores(answers: Record<string, string>): Record<string, numb
   } else if (answers.interest === 'us_stocks') {
     scores.monex += 4; scores.sbi += 2; scores.paypay += 1
   } else if (answers.interest === 'jp_stocks') {
-    scores.sbi += 2; scores.matsui += 3; scores.monex += 2; scores.rakuten += 1
+    scores.sbi += 2; scores.matsui += 3; scores.monex += 2; scores.rakuten += 1; scores.gmo += 2
   }
 
   return scores
