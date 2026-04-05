@@ -64,7 +64,10 @@ export interface Portfolio {
   allocation: {
     domestic_stock: number
     global_stock: number
-    bond: number
+    domestic_bond: number
+    global_bond: number
+    reit: number
+    commodity: number
     cash: number
   }
   color: string
@@ -76,7 +79,15 @@ export const PORTFOLIOS: Portfolio[] = [
     type: 'very_conservative',
     label: '超安定型',
     description: '元本の保全を最優先。リスクを極力避け、安定した資産を守ることを重視します。',
-    allocation: { domestic_stock: 5, global_stock: 5, bond: 55, cash: 35 },
+    allocation: {
+      domestic_stock: 5,
+      global_stock: 5,
+      domestic_bond: 30,
+      global_bond: 20,
+      reit: 5,
+      commodity: 5,
+      cash: 30,
+    },
     color: 'blue',
     scoreRange: [5, 10],
   },
@@ -84,7 +95,15 @@ export const PORTFOLIOS: Portfolio[] = [
     type: 'conservative',
     label: '安定型',
     description: '安定性を重視しながら、少しずつ資産を増やすことを目指します。',
-    allocation: { domestic_stock: 10, global_stock: 20, bond: 45, cash: 25 },
+    allocation: {
+      domestic_stock: 10,
+      global_stock: 15,
+      domestic_bond: 25,
+      global_bond: 20,
+      reit: 10,
+      commodity: 5,
+      cash: 15,
+    },
     color: 'teal',
     scoreRange: [11, 14],
   },
@@ -92,7 +111,15 @@ export const PORTFOLIOS: Portfolio[] = [
     type: 'balanced',
     label: 'バランス型',
     description: 'リスクとリターンのバランスを取りながら、中長期的な資産形成を目指します。',
-    allocation: { domestic_stock: 15, global_stock: 35, bond: 30, cash: 20 },
+    allocation: {
+      domestic_stock: 15,
+      global_stock: 30,
+      domestic_bond: 15,
+      global_bond: 15,
+      reit: 10,
+      commodity: 5,
+      cash: 10,
+    },
     color: 'green',
     scoreRange: [15, 18],
   },
@@ -100,7 +127,15 @@ export const PORTFOLIOS: Portfolio[] = [
     type: 'growth',
     label: '成長型',
     description: 'ある程度のリスクを許容し、長期的な資産成長を積極的に狙います。',
-    allocation: { domestic_stock: 20, global_stock: 50, bond: 20, cash: 10 },
+    allocation: {
+      domestic_stock: 20,
+      global_stock: 40,
+      domestic_bond: 5,
+      global_bond: 15,
+      reit: 10,
+      commodity: 5,
+      cash: 5,
+    },
     color: 'orange',
     scoreRange: [19, 22],
   },
@@ -108,7 +143,15 @@ export const PORTFOLIOS: Portfolio[] = [
     type: 'aggressive',
     label: '積極成長型',
     description: '高いリスクを許容し、長期的な高いリターンを目指します。',
-    allocation: { domestic_stock: 20, global_stock: 60, bond: 10, cash: 10 },
+    allocation: {
+      domestic_stock: 20,
+      global_stock: 45,
+      domestic_bond: 5,
+      global_bond: 10,
+      reit: 10,
+      commodity: 5,
+      cash: 5,
+    },
     color: 'red',
     scoreRange: [23, 25],
   },

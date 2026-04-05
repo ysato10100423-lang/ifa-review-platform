@@ -16,14 +16,20 @@ const TYPE_COLOR: Record<string, string> = {
 const BAR_COLOR: Record<string, string> = {
   domestic_stock: 'bg-blue-500',
   global_stock: 'bg-green-500',
-  bond: 'bg-yellow-400',
+  domestic_bond: 'bg-yellow-400',
+  global_bond: 'bg-amber-300',
+  reit: 'bg-purple-400',
+  commodity: 'bg-orange-400',
   cash: 'bg-gray-300',
 }
 
 const ALLOC_LABEL: Record<string, string> = {
   domestic_stock: '国内株式',
   global_stock: '海外株式',
-  bond: '債券',
+  domestic_bond: '国内債券',
+  global_bond: '海外債券',
+  reit: '不動産投信（REIT）',
+  commodity: 'コモディティ',
   cash: '現金・預金',
 }
 
@@ -107,7 +113,7 @@ function ResultContent() {
         <p className="text-sm font-semibold text-gray-700 mb-3">診断結果をシェアする</p>
         <div className="flex flex-col sm:flex-row gap-2">
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`ポートフォリオ診断をやってみました！\n\n私のタイプ：${portfolio.label}\n国内株${allocation.domestic_stock}% / 海外株${allocation.global_stock}% / 債券${allocation.bond}% / 現金${allocation.cash}%\n\nあなたのおすすめ資産配分は？👇`)}&url=${encodeURIComponent('https://ifa-review.com/portfolio?utm_source=twitter&utm_medium=social&utm_campaign=share')}&hashtags=ポートフォリオ診断,NISA,資産運用`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`ポートフォリオ診断をやってみました！\n\n私のタイプ：${portfolio.label}\n国内株${allocation.domestic_stock}% / 海外株${allocation.global_stock}% / 債券${allocation.domestic_bond + allocation.global_bond}% / REIT${allocation.reit}% / 現金${allocation.cash}%\n\nあなたのおすすめ資産配分は？👇`)}&url=${encodeURIComponent('https://ifa-review.com/portfolio?utm_source=twitter&utm_medium=social&utm_campaign=share')}&hashtags=ポートフォリオ診断,NISA,資産運用`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 bg-black text-white text-sm py-2.5 rounded hover:bg-gray-800"
@@ -118,7 +124,7 @@ function ResultContent() {
             Xでシェア
           </a>
           <a
-            href={`https://line.me/R/msg/text/?${encodeURIComponent(`ポートフォリオ診断をやってみました！\n私のタイプ：${portfolio.label}\n国内株${allocation.domestic_stock}% / 海外株${allocation.global_stock}% / 債券${allocation.bond}% / 現金${allocation.cash}%\n\nあなたも診断してみては？👇\nhttps://ifa-review.com/portfolio?utm_source=line&utm_medium=social&utm_campaign=share`)}`}
+            href={`https://line.me/R/msg/text/?${encodeURIComponent(`ポートフォリオ診断をやってみました！\n私のタイプ：${portfolio.label}\n国内株${allocation.domestic_stock}% / 海外株${allocation.global_stock}% / 債券${allocation.domestic_bond + allocation.global_bond}% / REIT${allocation.reit}% / 現金${allocation.cash}%\n\nあなたも診断してみては？👇\nhttps://ifa-review.com/portfolio?utm_source=line&utm_medium=social&utm_campaign=share`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white text-sm py-2.5 rounded hover:bg-green-600"
