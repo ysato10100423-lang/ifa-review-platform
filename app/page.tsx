@@ -90,6 +90,24 @@ export default async function Home({
         </a>
       </div>
 
+      {/* ポートフォリオ診断バナー */}
+      <div className="bg-gradient-to-r from-green-600 to-green-500 rounded-xl p-5 mb-6 text-white">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-medium bg-white/20 inline-block px-2 py-0.5 rounded-full mb-2">無料・1分で完了</p>
+            <h2 className="text-lg font-bold mb-1">あなたに合ったポートフォリオがわかる</h2>
+            <p className="text-sm text-green-100">5つの質問に答えるだけで、最適な資産配分をご提案します</p>
+          </div>
+          <span className="text-4xl shrink-0">📈</span>
+        </div>
+        <a
+          href="/portfolio"
+          className="mt-4 inline-block bg-white text-green-700 font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-green-50 transition-colors"
+        >
+          診断スタート →
+        </a>
+      </div>
+
       <div className="mb-4">
         <h1 className="text-2xl font-bold text-gray-900 mb-1">IFA・保険代理店の口コミ・評判</h1>
         <p className="text-sm text-gray-500">実際に利用したユーザーによる口コミ・評価を掲載しています</p>
