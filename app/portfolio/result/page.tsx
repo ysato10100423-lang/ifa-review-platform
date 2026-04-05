@@ -23,6 +23,16 @@ const BAR_COLOR: Record<string, string> = {
   cash: 'bg-gray-300',
 }
 
+const HEX_COLOR: Record<string, string> = {
+  domestic_stock: '#3b82f6',
+  global_stock:   '#22c55e',
+  domestic_bond:  '#facc15',
+  global_bond:    '#fcd34d',
+  reit:           '#c084fc',
+  commodity:      '#fb923c',
+  cash:           '#d1d5db',
+}
+
 const ALLOC_LABEL: Record<string, string> = {
   domestic_stock: '国内株式',
   global_stock: '海外株式',
@@ -54,6 +64,17 @@ function ResultContent() {
   const allocation = portfolio.allocation
   const colorClass = TYPE_COLOR[portfolio.type] ?? 'bg-gray-50 border-gray-300 text-gray-700'
 
+  // 円グラフ用 conic-gradient
+  const conicStops: string[] = []
+  let cumulative = 0
+  Object.entries(allocation).forEach(([key, value]) => {
+    if (value > 0) {
+      conicStops.push(`${HEX_COLOR[key]} ${cumulative}% ${cumulative + value}%`)
+      cumulative += value
+    }
+  })
+  const pieStyle = { background: `conic-gradient(${conicStops.join(', ')})` }
+
   return (
     <div className="max-w-xl mx-auto">
       {/* タイトル */}
@@ -74,16 +95,14 @@ function ResultContent() {
       <div className="bg-white border border-gray-200 rounded-lg p-5 mb-4">
         <h3 className="text-sm font-semibold text-gray-700 mb-4">推奨 資産配分</h3>
 
-        {/* 積み上げバー */}
-        <div className="flex rounded-full overflow-hidden h-6 mb-4">
-          {Object.entries(allocation).map(([key, value]) => (
-            <div
-              key={key}
-              className={`${BAR_COLOR[key]} transition-all`}
-              style={{ width: `${value}%` }}
-              title={`${ALLOC_LABEL[key]}: ${value}%`}
-            />
-          ))}
+        {/* 円グラフ（ドーナツ） */}
+        <div className="flex justify-center mb-5">
+          <div className="relative w-44 h-44">
+            <div className="w-full h-full rounded-full" style={pieStyle} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-20 h-20 bg-white rounded-full" />
+            </div>
+          </div>
         </div>
 
         {/* 凡例 */}
