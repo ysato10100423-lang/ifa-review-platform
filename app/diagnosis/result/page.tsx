@@ -169,10 +169,10 @@ function ResultContent() {
           もう一度診断する
         </Link>
         <Link
-          href="/"
-          className="flex-1 text-center bg-blue-600 text-white py-2.5 rounded hover:bg-blue-700 text-sm"
+          href="/portfolio"
+          className="flex-1 text-center bg-green-600 text-white py-2.5 rounded hover:bg-green-700 text-sm"
         >
-          IFAの口コミを見る
+          ポートフォリオ診断もやってみる
         </Link>
       </div>
     </div>
