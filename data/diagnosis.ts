@@ -114,7 +114,7 @@ export const BROKERS: Broker[] = [
     name: '松井証券',
     tagline: '長期投資家向けのサービスと丁寧なサポートが強み',
     strengths: ['投信毎月ポイント還元', 'ロボアド「投信工房」無料', 'サポートが充実', '日本株デイトレ手数料特典'],
-    url: 'https://www.matsui.co.jp/',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4B1D5L+3AHA5U+3XCC+6AZAQ',
     color: 'orange',
   },
   {
