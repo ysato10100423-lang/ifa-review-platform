@@ -13,7 +13,6 @@ export default function SignupPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
-  const [done, setDone] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,7 +47,7 @@ export default function SignupPage() {
       })
     }
 
-    setDone(true)
+    router.push('/')
     setLoading(false)
   }
 
@@ -61,24 +60,6 @@ export default function SignupPage() {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
-  }
-
-  if (done) {
-    return (
-      <div className="max-w-sm mx-auto mt-8">
-        <div className="bg-white border border-gray-200 rounded-lg p-6 text-center">
-          <div className="text-4xl mb-3">✉️</div>
-          <h2 className="text-lg font-bold text-gray-900 mb-2">確認メールを送信しました</h2>
-          <p className="text-sm text-gray-600 mb-4">
-            {email} に確認メールを送りました。<br />
-            メール内のリンクをクリックして登録を完了してください。
-          </p>
-          <Link href="/auth/login" className="text-blue-600 text-sm hover:underline">
-            ログインページへ
-          </Link>
-        </div>
-      </div>
-    )
   }
 
   return (
