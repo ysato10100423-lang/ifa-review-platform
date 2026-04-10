@@ -7,7 +7,7 @@ import StarRating from '@/components/StarRating'
 import ReviewCard from '@/components/ReviewCard'
 import ReviewCTA from './ReviewCTA'
 
-export const revalidate = 0
+export const dynamic = 'force-dynamic'
 
 const RATING_ITEMS = [
   { key: 'rating_proposal' as keyof Review, label: '提案の質' },
@@ -15,12 +15,6 @@ const RATING_ITEMS = [
   { key: 'rating_communication' as keyof Review, label: 'コミュニケーション' },
   { key: 'rating_expertise' as keyof Review, label: '専門知識' },
 ]
-
-export async function generateStaticParams() {
-  const supabase = createServerClient()
-  const { data } = await supabase.from('advisors').select('id')
-  return (data || []).map((a) => ({ id: a.id }))
-}
 
 export async function generateMetadata(
   { params }: { params: Promise<{ id: string }> }
