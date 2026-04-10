@@ -8,8 +8,6 @@ import ReviewCard from '@/components/ReviewCard'
 import ReviewCTA from './ReviewCTA'
 
 export const revalidate = 0
-// generateStaticParams で生成していないIDは404を返す
-export const dynamicParams = false
 
 const RATING_ITEMS = [
   { key: 'rating_proposal' as keyof Review, label: '提案の質' },
