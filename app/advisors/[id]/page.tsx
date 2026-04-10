@@ -68,7 +68,7 @@ export default async function AdvisorDetailPage(
     supabase.from('advisors').select('*').eq('id', id).single(),
     supabase
       .from('reviews')
-      .select('*, profiles(nickname)')
+      .select('*')
       .eq('advisor_id', id)
       .order('created_at', { ascending: false }),
   ])
