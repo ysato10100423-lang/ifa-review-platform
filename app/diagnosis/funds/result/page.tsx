@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { getRankedFunds } from '@/data/diagnosis-funds'
 import ProductCard from '@/components/ProductCard'
+import BrokerCreditCardSection from '@/components/BrokerCreditCardSection'
 import Link from 'next/link'
 
 function FundsResult() {
@@ -53,6 +54,9 @@ function FundsResult() {
             </div>
           </div>
         )}
+
+        {/* 証券会社・クレカ */}
+        <BrokerCreditCardSection />
 
         {/* SNSシェア */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
