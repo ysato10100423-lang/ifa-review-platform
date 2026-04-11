@@ -22,7 +22,7 @@ export default function Footer() {
           </Link>
         </div>
         <p className="text-xs text-gray-400 leading-relaxed">
-          © {new Date().getFullYear()} 金融商品ガイド
+          © {new Date().getFullYear()} 投信・保険 おすすめナビ
           当サイトは情報提供のみを目的としており、金融商品・保険の勧誘・媒介・紹介は行っておりません。
           掲載情報の正確性・完全性を保証するものではなく、投資・保険の加入はご自身の判断と責任のもとで行ってください。
           最新情報は各社公式サイトにてご確認ください。

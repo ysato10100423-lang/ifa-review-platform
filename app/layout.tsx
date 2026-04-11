@@ -8,8 +8,8 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 const notoSansJP = Noto_Sans_JP({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: '金融商品ガイド - 投資信託・保険の比較・無料診断',
-  description: '投資信託・保険商品のランキングと無料診断ツールで、あなたに最適な金融商品を見つけましょう。',
+  title: '投信・保険 おすすめナビ - 投資信託・保険の比較・無料診断',
+  description: '投資信託・保険のおすすめ商品をランキングと無料診断でご紹介。NISAや積立投資に最適なファンド、あなたに合った保険がすぐわかります。',
   verification: {
     google: 'LFV74eYugr7psQeNsXb3NySC4R3pISbN8XgZ4XsiyMU',
   },

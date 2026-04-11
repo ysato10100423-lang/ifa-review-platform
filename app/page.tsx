@@ -5,8 +5,8 @@ import { FUNDS } from '@/data/funds'
 import { INSURANCES } from '@/data/insurance'
 
 export const metadata: Metadata = {
-  title: '金融商品ガイド - 投資信託・保険の比較・無料診断',
-  description: '投資信託・保険商品のランキングと無料診断ツールで、あなたに最適な金融商品を見つけましょう。',
+  title: '投信・保険 おすすめナビ - 投資信託・保険の比較・無料診断',
+  description: '投資信託・保険のおすすめ商品をランキングと無料診断でご紹介。NISAや積立投資に最適なファンド、あなたに合った保険がすぐわかります。',
 }
 
 const top5Funds = FUNDS.filter(f => f.rank <= 5).sort((a, b) => a.rank - b.rank)
