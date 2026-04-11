@@ -8,8 +8,8 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 const notoSansJP = Noto_Sans_JP({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'IFAレビュー - IFA・保険代理店の口コミ・評判',
-  description: '実際に利用したユーザーによるIFA・保険代理店の口コミ・評価プラットフォーム',
+  title: '金融商品ガイド - 投資信託・保険の比較・無料診断',
+  description: '投資信託・保険商品のランキングと無料診断ツールで、あなたに最適な金融商品を見つけましょう。',
   verification: {
     google: 'LFV74eYugr7psQeNsXb3NySC4R3pISbN8XgZ4XsiyMU',
   },
