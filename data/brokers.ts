@@ -31,7 +31,7 @@ export const BROKERS: Broker[] = [
     id: 'monex',
     name: 'マネックス証券',
     tagline: 'マネックスカードのクレカ積立ポイント還元率が業界最高水準',
-    affiliate_url: '', // TODO: A8承認後に差し替え
+    affiliate_url: 'https://h.accesstrade.net/sp/cc?rk=0100p8ju00oqh7',
     features: ['クレカ積立還元率1.1%', '米国株・ETFが充実', '銘柄スカウター無料', 'dポイント連携'],
     point_rate: 1.1,
     card_id: 'monex-card',
