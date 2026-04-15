@@ -40,7 +40,7 @@ export const CREDIT_CARDS: CreditCard[] = [
     broker_id: 'rakuten',
     point_rate: 0.5,
     annual_fee: 0,
-    affiliate_url: '', // TODO: A8承認後に差し替え
+    affiliate_url: 'https://apply.card.rakuten.co.jp/trafficgate/cookieservlet?redirect_url=https%3A%2F%2Fwww.rakuten-card.co.jp%2Fcampaign%2Frakuten_card%2Faffiliate%2Fb.html%3Fscid%3Daf_oth_pc_tg',
     features: ['年会費永年無料', '楽天証券つみたて対応', '楽天ポイント還元', '楽天経済圏で更にお得'],
     points_program: '楽天ポイント',
   },
