@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ProductCard from '@/components/ProductCard'
 import { INSURANCES, INSURANCE_CATEGORIES, InsuranceCategory } from '@/data/insurance'
+import InsuranceConsultationSection from '@/components/InsuranceConsultationSection'
 import Link from 'next/link'
 
 export default function InsurancePage() {
@@ -62,7 +63,11 @@ export default function InsurancePage() {
         ))}
       </div>
 
-      <div className="mt-6 bg-gray-50 rounded-lg p-4 text-xs text-gray-500 leading-relaxed">
+      <div className="mt-6 mb-6">
+        <InsuranceConsultationSection />
+      </div>
+
+      <div className="bg-gray-50 rounded-lg p-4 text-xs text-gray-500 leading-relaxed">
         当サイトの情報は情報提供のみを目的としており、保険の勧誘・媒介は行っておりません。
         掲載の保険料はあくまで参考例であり、年齢・健康状態・加入条件によって異なります。
         最新情報・詳細条件は各社公式サイトにてご確認の上、ご自身の判断で加入をご検討ください。

@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { getRankedInsurances } from '@/data/diagnosis-insurance'
 import ProductCard from '@/components/ProductCard'
+import InsuranceConsultationSection from '@/components/InsuranceConsultationSection'
 import Link from 'next/link'
 
 function InsuranceResult() {
@@ -53,6 +54,9 @@ function InsuranceResult() {
             </div>
           </div>
         )}
+
+        {/* 保険相談CTA */}
+        <InsuranceConsultationSection />
 
         {/* SNSシェア */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
