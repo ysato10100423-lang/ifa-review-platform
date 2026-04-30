@@ -20,4 +20,14 @@ export const INSURANCE_CONSULTATIONS: InsuranceConsultation[] = [
     features: ['全国対応', 'オンライン相談OK', '在籍FP3,000名以上', '何度でも無料'],
     description: '全国3,000名以上のFP（ファイナンシャルプランナー）があなたの保険選びをサポート。オンラインで何度でも無料相談できます。',
   },
+  {
+    id: 'hoken-mammoth',
+    name: '保険マンモス',
+    provider: '保険マンモス株式会社',
+    affiliate_url: 'https://px.a8.net/svt/ejp?a8mat=4B1PLU+F4RNAQ+5SIO+5YZ75',
+    tracking_pixel: 'https://www11.a8.net/0.gif?a8mat=4B1PLU+F4RNAQ+5SIO+5YZ75',
+    reward: '無料相談完了',
+    features: ['満足度95%', '無料相談でギフト贈呈', '全国対応', '保険のプロが担当'],
+    description: '満足度95%の保険相談サービス。無料相談完了でギフトプレゼント。保険のプロが中立的な立場であなたに最適な保険をご提案します。',
+  },
 ]
