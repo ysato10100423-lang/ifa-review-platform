@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { getRankedFunds } from '@/data/diagnosis-funds'
 import ProductCard from '@/components/ProductCard'
 import BrokerCreditCardSection from '@/components/BrokerCreditCardSection'
+import InsuranceConsultationSection from '@/components/InsuranceConsultationSection'
 import Link from 'next/link'
 
 function FundsResult() {
@@ -80,6 +81,9 @@ function FundsResult() {
             </a>
           </div>
         </div>
+
+        {/* 貯蓄・NISA相談CTA */}
+        <InsuranceConsultationSection />
 
         {/* 他の診断へ */}
         <div className="border border-gray-200 rounded-lg p-4 mb-6 text-center">

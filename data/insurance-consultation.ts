@@ -30,4 +30,13 @@ export const INSURANCE_CONSULTATIONS: InsuranceConsultation[] = [
     features: ['満足度95%', '無料相談でギフト贈呈', '全国対応', '保険のプロが担当'],
     description: '満足度95%の保険相談サービス。無料相談完了でギフトプレゼント。保険のプロが中立的な立場であなたに最適な保険をご提案します。',
   },
+  {
+    id: 'garden',
+    name: '貯蓄の無料相談サイト「ガーデン」',
+    provider: 'ガーデン',
+    affiliate_url: 'https://h.accesstrade.net/sp/cc?rk=0100pedp00oqh7',
+    reward: '無料相談完了',
+    features: ['iDeCo・NISA・個人年金対応', 'プロが1対1でサポート', '全国対応', '完全無料'],
+    description: 'iDeCo・NISA・個人年金など老後のお金の不安をプロが1対1で解決。あなたにピッタリの貯蓄プランを無料でご提案します。',
+  },
 ]
