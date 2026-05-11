@@ -1,7 +1,8 @@
-import { INSURANCE_CONSULTATIONS } from '@/data/insurance-consultation'
+import { getInsuranceConsultations } from '@/data/insurance-consultation'
 
 export default function InsuranceConsultationSection() {
-  if (INSURANCE_CONSULTATIONS.length === 0) return null
+  const consultations = getInsuranceConsultations()
+  if (consultations.length === 0) return null
 
   return (
     <div className="mb-6">
@@ -15,7 +16,7 @@ export default function InsuranceConsultationSection() {
       </div>
 
       <div className="space-y-4">
-        {INSURANCE_CONSULTATIONS.map(service => (
+        {consultations.map(service => (
           <div key={service.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
             <div className="p-4">
               <div className="flex items-start justify-between gap-2 mb-2">
