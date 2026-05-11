@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ProductCard from '@/components/ProductCard'
 import { FUNDS, FUND_CATEGORIES, FundCategory } from '@/data/funds'
+import InvestmentSchoolSection from '@/components/InvestmentSchoolSection'
 import Link from 'next/link'
 
 export default function FundsPage() {
@@ -91,7 +92,11 @@ export default function FundsPage() {
         ))}
       </div>
 
-      <div className="mt-6 bg-gray-50 rounded-lg p-4 text-xs text-gray-500 leading-relaxed">
+      <div className="mt-6">
+        <InvestmentSchoolSection />
+      </div>
+
+      <div className="bg-gray-50 rounded-lg p-4 text-xs text-gray-500 leading-relaxed">
         当サイトの情報は情報提供のみを目的としており、金融商品の勧誘・媒介は行っておりません。
         最新の信託報酬・基準価額・運用実績は各ファンドの目論見書および各社公式サイトをご確認ください。
         過去の運用実績は将来の成果を保証するものではありません。

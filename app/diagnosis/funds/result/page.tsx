@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import { getRankedFunds } from '@/data/diagnosis-funds'
 import ProductCard from '@/components/ProductCard'
 import BrokerCreditCardSection from '@/components/BrokerCreditCardSection'
+import InvestmentSchoolSection from '@/components/InvestmentSchoolSection'
 import InsuranceConsultationSection from '@/components/InsuranceConsultationSection'
 import Link from 'next/link'
 
@@ -58,6 +59,9 @@ function FundsResult() {
 
         {/* 証券会社・クレカ */}
         <BrokerCreditCardSection />
+
+        {/* 投資スクール */}
+        <InvestmentSchoolSection />
 
         {/* SNSシェア */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
