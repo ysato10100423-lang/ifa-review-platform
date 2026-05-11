@@ -28,9 +28,11 @@ export default function BrokerCreditCardSection() {
               <div className="p-4 border-b border-gray-100">
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <h3 className="font-semibold text-gray-900 text-sm">{broker.name}</h3>
-                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full shrink-0">
-                    つみたて還元 {broker.point_rate}%
-                  </span>
+                  {broker.point_rate !== undefined && (
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full shrink-0">
+                      つみたて還元 {broker.point_rate}%
+                    </span>
+                  )}
                 </div>
                 <p className="text-xs text-gray-600 mb-3">{broker.tagline}</p>
                 <div className="flex flex-wrap gap-1 mb-3">

@@ -2,13 +2,22 @@ export type Broker = {
   id: string
   name: string
   tagline: string
-  affiliate_url: string // TODO: A8承認後にトラッキングURLを差し替え
+  affiliate_url: string
+  tracking_pixel?: string
   features: string[]
-  point_rate: number   // つみたて投資のポイント還元率（%）
-  card_id: string      // 相性の良いクレカID（creditcards.tsと対応）
+  point_rate?: number  // クレカ積立ポイント還元率（%）。株専業など非対応の場合は省略
+  card_id?: string     // 相性の良いクレカID（creditcards.tsと対応）
 }
 
 export const BROKERS: Broker[] = [
+  {
+    id: 'dmm-kabu',
+    name: 'DMM株',
+    tagline: 'スマホで日本株・米国株・NISAを簡単取引。取引するたびポイントが貯まる',
+    affiliate_url: 'https://px.a8.net/svt/ejp?a8mat=4B3NZ0+ZQ12Q+1WP2+15P77L',
+    tracking_pixel: 'https://www14.a8.net/0.gif?a8mat=4B3NZ0+ZQ12Q+1WP2+15P77L',
+    features: ['日本株・米国株・NISA対応', 'スマホアプリで簡単取引', '取引でポイント還元', '手数料業界最安水準'],
+  },
   {
     id: 'sbi',
     name: 'SBI証券',
