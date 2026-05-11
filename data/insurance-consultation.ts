@@ -11,6 +11,16 @@ export type InsuranceConsultation = {
 
 export const INSURANCE_CONSULTATIONS: InsuranceConsultation[] = [
   {
+    id: 'hoken-minaoshi-honpo',
+    name: '保険見直し本舗',
+    provider: '株式会社保険見直し本舗',
+    affiliate_url: 'https://px.a8.net/svt/ejp?a8mat=4B1PLU+FIGM7M+5V54+5YZ75',
+    tracking_pixel: 'https://www10.a8.net/0.gif?a8mat=4B1PLU+FIGM7M+5V54+5YZ75',
+    reward: '無料相談完了',
+    features: ['初回相談でノベルティプレゼント', 'えらべるギフト', '全国対応', '完全無料'],
+    description: '初めてのご相談でえらべるノベルティをプレゼント。保険の見直しから新規加入まで、保険のプロが中立的な立場で最適なプランを無料でご提案します。',
+  },
+  {
     id: 'minna-no-seimei',
     name: 'みんなの生命保険アドバイザー',
     provider: 'パワープランニング株式会社',
