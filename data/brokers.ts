@@ -31,7 +31,7 @@ export const BROKERS: Broker[] = [
     id: 'rakuten',
     name: '楽天証券',
     tagline: '楽天カードで積立するとポイント還元。楽天経済圏との相性抜群',
-    affiliate_url: '', // TODO: A8承認後に差し替え
+    affiliate_url: 'https://ad2.trafficgate.net/t/r/1269/738/317360_396598',
     features: ['楽天カードでポイント還元', 'アプリが使いやすい', 'NISA積立に最適', '楽天銀行連携でお得'],
     point_rate: 0.5,
     card_id: 'rakuten-card',
